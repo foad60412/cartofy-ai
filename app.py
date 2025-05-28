@@ -139,9 +139,6 @@ def internal_error(error):
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
