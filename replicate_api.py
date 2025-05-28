@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 from dotenv import load_dotenv
 
@@ -29,14 +30,21 @@ def cartoonify_image(image_url):
 
     prediction_id = result["id"]
 
-    while result["status"] not in ["succeeded", "failed"]:
+    # 🟡 الانتظار الأقصى: 90 ثانية
+    for _ in range(45):  # 45 محاولة × 2 ثانية = 90 ثانية
         r = requests.get(f"{endpoint}/{prediction_id}", headers=headers)
         result = r.json()
 
-    if result["status"] == "succeeded":
-        output = result["output"]
-        print("✅ النتيجة من Replicate:", output)
-        return output  # ✅ رابط نصي مباشر
-    else:
-        print("❌ فشل المعالجة:", result)
-        return None
+        if result["status"] == "succeeded":
+            output = result["output"]
+            print("✅ النتيجة من Replicate:", output)
+            return output
+
+        if result["status"] == "failed":
+            print("❌ فشل المعالجة:", result)
+            return None
+
+        time.sleep(2)  # ✅ تأخير مهم لتفادي الضغط والمهلة
+
+    print("❌ تجاوز وقت الانتظار 90 ثانية.")
+    return None
