@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
   <title>Cartofy</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
@@ -19,6 +19,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 25px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .logo {
@@ -29,29 +31,24 @@
       margin-top: -20px;
     }
 
+    .privacy-circle, .logout-btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      margin: 0;
+    }
+
     .privacy-circle {
       background: #2f00ff;
       color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 9px;
-      font-size: 12px;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: -13px;
-      margin: 5px;
     }
 
     .logout-btn {
       background: #d32f2f;
       color: white;
       border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: -10px;
     }
 
     .container {
@@ -146,6 +143,7 @@
 
     .image-card img {
       max-width: 300px;
+      width: 100%;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       margin-bottom: 15px;
@@ -168,6 +166,7 @@
       display: flex;
       justify-content: center;
       gap: 15px;
+      flex-wrap: wrap;
     }
 
     .overlay {
@@ -204,55 +203,58 @@
       font-size: 18px;
       color: #4a148c;
       font-weight: bold;
+      text-align: center;
     }
+
+    .dots::after {
+      content: '';
+      display: inline-block;
+      animation: dots 1.5s steps(3, end) infinite;
+    }
+
+    @keyframes dots {
+      0%   { content: ''; }
+      33%  { content: '.'; }
+      66%  { content: '..'; }
+      100% { content: '...'; }
+    }
+
     @media (max-width: 768px) {
-  .header-bar {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
+      .header-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-  .logo {
-    font-size: 28px;
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
+      .logo {
+        font-size: 28px;
+        margin-top: 0;
+      }
 
-  .container {
-    padding: 10px;
-  }
+      .privacy-circle, .logout-btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+      }
 
-  .card, .image-card {
-    padding: 15px;
-    border-radius: 15px;
-  }
+      .card {
+        padding: 15px;
+      }
 
-  .custom-file-upload {
-    font-size: 13px;
-    padding: 10px 15px;
-  }
+      .custom-file-upload {
+        font-size: 13px;
+        padding: 10px 15px;
+      }
 
-  .btn, .btn-danger {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
+      .btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
 
-  .image-card img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .btn-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .privacy-circle, .logout-btn {
-    width: 100%;
-    max-width: 200px;
-  }
-}
-
+      .btn-group {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -312,7 +314,10 @@
 
   <div class="overlay" id="overlay">
     <div class="spinner"></div>
-    <div class="overlay-text">جارٍ تحويل صورتك إلى كرتون... الرجاء الانتظار</div>
+    <div class="overlay-text">
+      يتم الآن تحويل صورتك إلى كرتون باستخدام الذكاء الاصطناعي<br>
+      قد يستغرق ذلك دقيقة أو أكثر، نرجو الانتظار<span class="dots"></span>
+    </div>
   </div>
 
   <script>
