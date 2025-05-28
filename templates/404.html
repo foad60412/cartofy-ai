@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>404 - الصفحة غير موجودة</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      background: linear-gradient(-45deg, #fce4ec, #f3e5f5, #e1f5fe, #b3e5fc);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      font-family: 'Tajawal', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .emoji {
+      font-size: 100px;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 70px;
+      color: #d32f2f;
+      margin: 10px 0;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    p {
+      font-size: 22px;
+      color: #555;
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 0.6s;
+    }
+
+    a.btn {
+      margin-top: 30px;
+      background: #6a1b9a;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      text-decoration: none;
+      transition: background 0.3s;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 1s;
+    }
+
+    a.btn:hover {
+      background: #4a148c;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="emoji">😕</div>
+  <h1>404</h1>
+  <p>أوه! يبدو أنك تهت في الطريق... دعنا نعيدك للمكان الصحيح!</p>
+  <a href="/" class="btn">العودة إلى الصفحة الرئيسية</a>
+  <p>سيتم تحويلك تلقائيًا خلال <span id="counter">5</span> ثوانٍ...</p>
+<script>
+  let c = 5;
+  setInterval(() => {
+    if (c > 0) {
+      c--;
+      document.getElementById("counter").innerText = c;
+    } else {
+      window.location.href = "/";
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الاشتراك في Cartofy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: linear-gradient(to left, #e0c3fc, #8ec5fc);
+      font-family: 'Tajawal', sans-serif;
+      padding: 40px 20px;
+      margin: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #6a1b9a;
+      margin-bottom: 30px;
+    }
+
+    .plans {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .plan {
+      flex: 1;
+      background: #fdfdfd;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      text-align: center;
+      min-width: 280px;
+    }
+
+    .plan h2 {
+      color: #6a1b9a;
+      margin-bottom: 15px;
+    }
+
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .plan ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    #paypal-button-container {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .plans {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>استمتع بتحويل صورك إلى كرتون بلا حدود!</h1>
+  <div class="plans">
+
+    <div class="plan">
+      <h2>الحساب المجاني</h2>
+      <ul>
+        <li>تحويل صورة واحدة فقط</li>
+        <li>لا يتم حفظ الصور</li>
+        <li>لا يمكن الرجوع لسجل الصور</li>
+        <li>تجربة محدودة</li>
+      </ul>
+    </div>
+
+    <div class="plan">
+      <h2>الاشتراك المدفوع <br><span style="font-size: 20px; color: #444;">(فقط بـ 2.99 دولار لمرة واحدة)</span></h2>
+      <ul>
+        <li>تحويل عدد غير محدود من الصور</li>
+        <li>حفظ الصور الكرتونية في حسابك</li>
+        <li>الوصول الكامل لسجل الصور</li>
+        <li>دعم وأداء أسرع</li>
+      </ul>
+
+      <!-- زر PayPal الديناميكي -->
+      <div id="paypal-button-container"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- تضمين PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=ASkY3B2XJYMOCQUBG3GZyWeyvIV6I7CoOp4UeD7Csb8su3zlIeu8LNUkAr54BHvPSjeUoSexJyFCMfRs&currency=USD"></script>
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '2.99' }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        fetch("/verify_payment", { method: "POST" })
+          .then(() => {
+            window.location.href = "/confirm_payment";
+          });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+</body>
+</html>

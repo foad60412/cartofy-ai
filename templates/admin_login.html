@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل دخول الأدمن</title>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(to left, #f3e5f5, #e1f5fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    input, button {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    button {
+      background: #6a1b9a;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form method="POST">
+    <h2>لوحة دخول الأدمن</h2>
+    <input type="email" name="email" placeholder="البريد الإلكتروني">
+    <input type="password" name="password" placeholder="كلمة السر">
+    <button type="submit">دخول</button>
+  </form>
+</body>
+</html>

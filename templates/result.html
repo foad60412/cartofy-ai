@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>صورتك الكرتونية جاهزة - Cartofy</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #f3e5f5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .result-container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #4a148c;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+      background: #6a1b9a;
+      color: white;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px 5px;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #4a148c;
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      background: #777;
+    }
+
+    .btn-secondary:hover {
+      background: #555;
+    }
+
+    .subscribe-offer {
+      margin-top: 25px;
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 15px;
+      color: #856404;
+    }
+
+    .subscribe-offer a {
+      color: #4a148c;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="result-container">
+    <h2>صورتك الكرتونية جاهزة!</h2>
+    <img src="{{ cartoon }}" alt="Cartoon Image">
+    
+    <br>
+    <a href="{{ cartoon }}" class="btn" download><i class="fas fa-download"></i> تحميل الصورة</a>
+    <a href="/dashboard" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> العودة إلى لوحة التحكم</a>
+
+    {% if plan == "free" %}
+    <div class="subscribe-offer">
+      لقد استخدمت تحويلك المجاني. للاستمتاع بعدد غير محدود من التحويلات،
+      <a href="/pay">اشترك الآن</a>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Cartofy</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #f3e5f5);
+      direction: rtl;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #6a1b9a;
+      margin-top: -20px;
+    }
+
+    .privacy-circle {
+      background: #2f00ff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 9px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: -13px;
+      margin: 5px;
+    }
+
+    .logout-btn {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: -10px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #4a148c;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .custom-file-upload {
+      border: 2px dashed #aaa;
+      display: inline-block;
+      padding: 15px 25px;
+      cursor: pointer;
+      border-radius: 12px;
+      background: #ffffff;
+      font-size: 14px;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .custom-file-upload:hover {
+      background: #f0f0f0;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #file-name {
+      margin-top: 10px;
+      color: #4a148c;
+      font-size: 13px;
+    }
+
+    .btn {
+      background: #6a1b9a;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 8px 4px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #4a148c;
+      transform: scale(1.05);
+    }
+
+    .btn-danger {
+      background: #c62828;
+    }
+
+    .btn-danger:hover {
+      background: #a31515;
+      transform: scale(1.05);
+    }
+
+    .image-card {
+      background: #f8eafc;
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0,0,0,0.05);
+    }
+
+    .image-card img {
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+
+    .image-label {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #4a148c;
+    }
+
+    .image-date {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 20px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: rgba(255,255,255,0.9);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .spinner {
+      border: 6px solid #e0e0e0;
+      border-top: 6px solid #6a1b9a;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .overlay-text {
+      font-size: 18px;
+      color: #4a148c;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <a href="/privacy" class="privacy-circle">سياسة الخصوصية</a>
+    <form action="/logout" method="get">
+      <button class="logout-btn">تسجيل الخروج</button>
+    </form>
+  </div>
+
+  <div class="logo">Cartofy</div>
+
+  <div class="container">
+
+    <div class="card">
+      <h3>رفع صورة جديدة</h3>
+      <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data" onsubmit="showOverlay();">
+        <label for="file-upload" class="custom-file-upload">
+          <i class="fas fa-cloud-upload-alt"></i> اختر صورة
+        </label>
+        <input id="file-upload" type="file" name="image" accept="image/*" required onchange="showFileName(this)">
+        <p id="file-name">لم يتم اختيار صورة بعد</p>
+        <button type="submit" class="btn"><i class="fas fa-magic"></i> تحويل إلى كرتون</button>
+      </form>
+    </div>
+
+    {% if plan == 'free' %}
+      <div class="card" style="background:#fff3cd;">
+        <p style="text-align:center;">
+          لديك تحويل مجاني واحد فقط. <a href="/pay"><strong>اشترك الآن</strong></a> للوصول غير المحدود.
+        </p>
+      </div>
+    {% endif %}
+
+    {% if images %}
+      {% for img in images %}
+        <div class="image-card">
+          <div class="image-label">الصورة الكرتونية</div>
+          <div class="image-date">تم التحويل بتاريخ: {{ img.created_at[:10] }}</div>
+          <img src="{{ img.cartoon_url }}" alt="cartoon">
+          <div class="btn-group">
+            <a href="{{ img.cartoon_url }}" class="btn" download><i class="fas fa-download"></i> تحميل</a>
+            <form action="/delete_image" method="post">
+              <input type="hidden" name="image_url" value="{{ img.cartoon_url }}">
+              <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> حذف</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="card" style="text-align:center;">
+        <p>لا توجد صور محفوظة حتى الآن.</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="spinner"></div>
+    <div class="overlay-text">جارٍ تحويل صورتك إلى كرتون... الرجاء الانتظار</div>
+  </div>
+
+  <script>
+    function showOverlay() {
+      document.getElementById('overlay').classList.add('active');
+    }
+
+    function showFileName(input) {
+      const fileName = input.files.length ? input.files[0].name : "لم يتم اختيار صورة بعد";
+      document.getElementById('file-name').textContent = fileName;
+    }
+  </script>
+</body>
+</html>

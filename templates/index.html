@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Cartofy - حوّل صورتك إلى كرتون</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="حوّل صورتك إلى كرتون باستخدام الذكاء الاصطناعي بنقرة واحدة. تجربة مجانية، واشتراك مدى الحياة بـ3 دولار فقط.">
+  <meta property="og:title" content="Cartofy - حوّل صورتك إلى كرتون">
+  <meta property="og:description" content="تحويل الصور إلى رسومات كرتونية بالذكاء الاصطناعي. تجربة مجانية واشتراك مدى الحياة.">
+  <meta property="og:image" content="/static/images/sample1.jpg">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ede7f6);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .main-content {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      max-width: 1000px;
+      width: 100%;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .text-content h2 {
+      color: #4a148c;
+      margin-bottom: 15px;
+      font-size: 26px;
+    }
+
+    .text-content p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .btn-group {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #4a148c;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .primary-btn {
+      background-color: #ff9800;
+    }
+
+    .primary-btn:hover {
+      background-color: #fb8c00;
+    }
+
+    .privacy-btn {
+      background-color: #2c3e50;
+    }
+
+    .privacy-btn:hover {
+      background-color: #1a252f;
+    }
+
+    /* Carousel */
+    .carousel-inner img {
+      height: 360px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-caption {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      color: white;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      padding: 10px;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background: #f9f9f9;
+      padding: 50px 20px;
+      text-align: right;
+    }
+
+    .faq-section h3 {
+      color: #6a1b9a;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .faq {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .faq-item {
+      margin-bottom: 25px;
+    }
+
+    .faq-item h4 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .faq-item p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column;
+        padding: 25px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    Cartofy | حوّل صورتك إلى كرتون
+  </div>
+
+  <div class="main">
+    <div class="main-content">
+      <div class="text-content">
+        <h2>حوّل صورك إلى كرتون خلال ثوانٍ!</h2>
+        <p>Cartofy يستخدم الذكاء الاصطناعي لتحويل صورك الشخصية إلى رسومات كرتونية مذهلة بسهولة وسرعة. تجربة مجانية لمرة واحدة، أو اشتراك مدى الحياة بـ 3 دولار فقط.</p>
+        <div class="btn-group">
+          <a href="/signup" class="btn primary-btn"><i class="fas fa-magic"></i> ابدأ الآن مجانًا</a>
+          <a href="/login" class="btn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+          <a href="/privacy" class="btn privacy-btn"><i class="fas fa-user-shield"></i> سياسات الخصوصية</a>
+        </div>
+      </div>
+
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/static/images/sample1.jpg" class="d-block w-100" alt="صورة كرتونية 1">
+            <div class="carousel-caption d-none d-md-block">
+              <p>حوّل صورك إلى كرتون واقعي خلال ثوانٍ</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/images/sample2.jpg" class="d-block w-100" alt="صورة كرتونية 2">
+            <div class="carousel-caption d-none d-md-block">
+              <p>مدعوم بأحدث تقنيات الذكاء الاصطناعي</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/images/sample3.jpg" class="d-block w-100" alt="صورة كرتونية 3">
+            <div class="carousel-caption d-none d-md-block">
+              <p>نتائج بجودة عالية ودقة مذهلة</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">السابق</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">التالي</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h3>الأسئلة الشائعة</h3>
+    <div class="faq">
+      <div class="faq-item">
+        <h4>ما هي تقنية Cartofy؟</h4>
+        <p>Cartofy يستخدم تقنية الذكاء الاصطناعي من نوع "Neural Style Transfer" لتحويل الصور العادية إلى صور كرتونية احترافية.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>هل التحويل مجاني؟</h4>
+        <p>نعم، يحصل كل مستخدم جديد على تحويل مجاني واحد لتجربة الخدمة.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>ما الفرق بين الحساب المجاني والمدفوع؟</h4>
+        <p>الحساب المجاني يتيح تحويل صورة واحدة فقط ولا يتم حفظها. أما الحساب المدفوع (3 دولار فقط مدى الحياة) فيتيح تحويل غير محدود مع حفظ الصور في سجل الحساب.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>هل يتم حفظ الصور؟</h4>
+        <p>لا، الصور الأصلية يتم حذفها دائمًا بعد التحويل. فقط الحساب المدفوع يتم حفظ الصور الكرتونية في سجل الحساب. المستخدم المجاني يمكنه تحميل الصورة مباشرة لكنها لا تُحفظ.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>هل يمكنني حذف صوري من الموقع؟</h4>
+        <p>نعم، مستخدمو الحساب المدفوع يمكنهم حذف الصور الكرتونية من سجلهم في أي وقت.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
