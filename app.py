@@ -13,6 +13,20 @@ app.secret_key = os.getenv("SECRET_KEY")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
+def increment_visits():
+    try:
+        row = supabase.table("visits").select("*").eq("id", 1).execute()
+        if row.data:
+            current_count = row.data[0]["count"]
+            supabase.table("visits").update({"count": current_count + 1}).eq("id", 1).execute()
+    except Exception as e:
+        print("خطأ أثناء تسجيل الزيارة:", e)
+
+@app.route('/')
+def home():
+    increment_visits()
+    return render_template("index.html")
+
 @app.route('/admin-logout')
 def admin_logout():
     session.pop('admin', None)
@@ -49,6 +63,13 @@ def admin_dashboard():
     total_images   = len(imgs)
     total_earnings = paid_users * 3  # غيّر السعر لو حابب
 
+    # ✅ إضافة: حساب عدد زوار الموقع
+    try:
+        visits_data = supabase.table("visits").select("count").eq("id", 1).execute()
+        visits_count = visits_data.data[0]["count"] if visits_data.data else 0
+    except:
+        visits_count = 0
+
     users = []
     for s in subs:
         uid        = s["user_id"]
@@ -69,8 +90,10 @@ def admin_dashboard():
         free_users=free_users,
         total_images=total_images,
         total_earnings=total_earnings,
-        users=users
+        users=users,
+        visits_count=visits_count  # ✅ تمرير المتغير للقالب
     )
+
 
 @app.route('/admin/upgrade', methods=['POST'])
 def admin_upgrade():
