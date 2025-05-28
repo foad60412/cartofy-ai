@@ -205,6 +205,54 @@
       color: #4a148c;
       font-weight: bold;
     }
+    @media (max-width: 768px) {
+  .header-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .logo {
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .card, .image-card {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .custom-file-upload {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+
+  .btn, .btn-danger {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .image-card img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .privacy-circle, .logout-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
   </style>
 </head>
 <body>
