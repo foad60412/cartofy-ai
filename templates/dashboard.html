@@ -10,7 +10,7 @@
     body {
       margin: 0;
       font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(to bottom right, #e3f2fd, #f3e5f5);
+      background: linear-gradient(to bottom right, #fce4ec, #ede7f6);
       direction: rtl;
     }
 
@@ -18,31 +18,37 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 25px;
-      flex-wrap: wrap;
-      gap: 10px;
+      padding: 10px 25px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
     .logo {
-      text-align: center;
-      font-size: 36px;
+      font-size: 32px;
       font-weight: bold;
       color: #6a1b9a;
-      margin-top: -20px;
+      text-align: center;
+      flex: 1;
     }
 
-    .privacy-btn, .logout-btn {
-      padding: 8px 14px;
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header {
+      padding: 6px 14px;
       border-radius: 20px;
       border: none;
       font-size: 14px;
-      text-decoration: none;
       cursor: pointer;
       font-weight: bold;
+      text-decoration: none;
       transition: 0.3s;
     }
 
-    .privacy-circle {
+    .privacy-btn {
       background-color: #e1bee7;
       color: #4a148c;
     }
@@ -51,10 +57,33 @@
       background-color: #ffcdd2;
       color: #b71c1c;
     }
-    .privacy-btn:hover, .logout-btn:hover {
-       opacity: 0.9;
+
+    .btn-header:hover {
+      opacity: 0.9;
       transform: scale(1.03);
-   }
+    }
+
+    .subscribe-bar {
+      background-color: #f3e5f5;
+      padding: 12px 25px;
+      text-align: center;
+    }
+
+    .subscribe-bar a {
+      background: #4caf50;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .subscribe-bar a:hover {
+      background-color: #388e3c;
+    }
+
     .container {
       max-width: 850px;
       margin: auto;
@@ -85,7 +114,6 @@
 
     .custom-file-upload {
       border: 2px dashed #aaa;
-      display: inline-block;
       padding: 15px 25px;
       cursor: pointer;
       border-radius: 12px;
@@ -133,7 +161,6 @@
 
     .btn-danger:hover {
       background: #a31515;
-      transform: scale(1.05);
     }
 
     .image-card {
@@ -226,34 +253,16 @@
     @media (max-width: 768px) {
       .header-bar {
         flex-direction: column;
-        align-items: stretch;
+        gap: 10px;
       }
-
       .logo {
-        font-size: 28px;
-        margin-top: 0;
+        font-size: 24px;
+        margin: 10px 0;
       }
-
-      .privacy-circle, .logout-btn {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
-      }
-
-      .card {
-        padding: 15px;
-      }
-
-      .custom-file-upload {
-        font-size: 13px;
-        padding: 10px 15px;
-      }
-
       .btn {
         font-size: 14px;
         padding: 8px 16px;
       }
-
       .btn-group {
         flex-direction: column;
         gap: 10px;
@@ -264,18 +273,27 @@
 <body>
 
   <div class="header-bar">
-    <a href="/privacy" class="privacy-btn">سياسة الخصوصية</a>
-    <form action="/logout" method="get">
-      <button class="logout-btn">تسجيل الخروج</button>
-    </form>
+    <div class="header-left">
+      <a href="/privacy" class="btn-header privacy-btn">سياسة الخصوصية</a>
+    </div>
+    <div class="logo">Cartofy</div>
+    <div class="header-right">
+      <form action="/logout" method="get">
+        <button class="btn-header logout-btn">تسجيل الخروج</button>
+      </form>
+    </div>
   </div>
 
-  <div class="logo">Cartofy</div>
+  {% if plan == 'free' %}
+  <div class="subscribe-bar">
+    <a href="/pay"><i class="fas fa-star"></i> اشترك الآن للوصول غير المحدود</a>
+  </div>
+{% endif %}
 
   <div class="container">
 
     <div class="card">
-      <h3>رفع صورة جديدة</h3>
+      <h3>قم بتحويل صورتك إلى كرتون</h3>
       <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data" onsubmit="showOverlay();">
         <label for="file-upload" class="custom-file-upload">
           <i class="fas fa-cloud-upload-alt"></i> اختر صورة

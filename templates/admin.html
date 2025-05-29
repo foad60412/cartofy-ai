@@ -7,11 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0; padding: 0 20px 40px;
+      margin: 0;
+      padding: 0 15px 40px;
       font-family: 'Tajawal', sans-serif;
       background: linear-gradient(to right, #f8bbd0, #bbdefb);
       color: #333;
     }
+
     header {
       background: #6a1b9a;
       color: white;
@@ -20,54 +22,99 @@
       font-size: 24px;
       position: relative;
     }
+
     .logout {
-      position: absolute; left: 20px; top: 12px;
+      position: absolute;
+      left: 20px;
+      top: 12px;
     }
+
     .logout a {
-      background: #e53935; color: white;
-      padding: 6px 12px; border-radius: 6px;
-      text-decoration: none;
-    }
-    .stats {
-      margin: 20px auto;
-      width: 100%; max-width: 800px;
-      background: white; border-radius: 12px;
-      display: table; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .stats th, .stats td {
-      padding: 12px 8px; text-align: center;
-      border-bottom: 1px solid #eee;
-    }
-    .stats th {
-      background: #ba68c8; color: white;
-    }
-    .stats tr:last-child td {
-      border-bottom: none;
-      font-weight: bold; color: #6a1b9a;
-    }
-    .users {
-      margin: 30px auto 0;
-      width: 100%; max-width: 800px;
-      border-collapse: collapse;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .users th, .users td {
-      padding: 12px 8px;
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-    .users th {
-      background: #7e57c2; color: white;
-    }
-    .users tr:nth-child(even) { background: #f9f9f9; }
-    .btn {
+      background: #e53935;
+      color: white;
       padding: 6px 12px;
-      border: none; border-radius: 6px;
-      color: white; cursor: pointer;
+      border-radius: 6px;
+      text-decoration: none;
       font-size: 14px;
     }
-    .btn-upgrade { background: #29b6f6; }
-    .btn-delete  { background: #ef5350; }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 12px 8px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #7e57c2;
+      color: white;
+    }
+
+    .stats th {
+      background: #ba68c8;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-upgrade {
+      background: #29b6f6;
+    }
+
+    .btn-delete {
+      background: #ef5350;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        font-size: 20px;
+        padding: 14px;
+      }
+
+      .logout a {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+
+      table {
+        min-width: 100%;
+        font-size: 13px;
+      }
+
+      .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -78,59 +125,63 @@
   </header>
 
   <!-- جدول الإحصائيات -->
-  <table class="stats">
-    <tr>
-      <th>عدد زوار الموقع</th>
-      <th>إجمالي المستخدمين</th>
-      <th>مجانيين</th>
-      <th>مدفوعين</th>
-      <th>الصور المحفوظة</th>
-      <th>الأرباح (USD)</th>
-    </tr>
-    <tr>
-      <td>{{ visits_count }}</td>
-      <td>{{ total_users }}</td>
-      <td>{{ free_users }}</td>
-      <td>{{ paid_users }}</td>
-      <td>{{ total_images }}</td>
-      <td>{{ total_earnings }}</td>
-    </tr>
-  </table>
+  <div class="table-container">
+    <table class="stats">
+      <tr>
+        <th>عدد زوار الموقع</th>
+        <th>إجمالي المستخدمين</th>
+        <th>مجانيين</th>
+        <th>مدفوعين</th>
+        <th>الصور المحفوظة</th>
+        <th>الأرباح (USD)</th>
+      </tr>
+      <tr>
+        <td>{{ visits_count }}</td>
+        <td>{{ total_users }}</td>
+        <td>{{ free_users }}</td>
+        <td>{{ paid_users }}</td>
+        <td>{{ total_images }}</td>
+        <td>{{ total_earnings }}</td>
+      </tr>
+    </table>
+  </div>
 
   <!-- جدول المستخدمين -->
-  <table class="users">
-    <thead>
-      <tr>
-        <th>البريد الإلكتروني</th>
-        <th>تاريخ التسجيل</th>
-        <th>الحالة</th>
-        <th>عدد الصور</th>
-        <th>إجراءات</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for u in users %}
-      <tr>
-        <td>{{ u.email }}</td>
-        <td>{{ u.created_at }}</td>
-        <td>{{ 'مدفوع' if u.status == 'paid' else 'مجاني' }}</td>
-        <td>{{ u.image_count }}</td>
-        <td>
-          {% if u.status == 'free' %}
-          <form style="display:inline" method="POST" action="/admin/upgrade">
-            <input type="hidden" name="user_id" value="{{ u.id }}">
-            <button class="btn btn-upgrade" type="submit">ترقية</button>
-          </form>
-          {% endif %}
-          <form style="display:inline" method="POST" action="/admin/delete" onsubmit="return confirm('تأكيد الحذف؟');">
-            <input type="hidden" name="user_id" value="{{ u.id }}">
-            <button class="btn btn-delete" type="submit">حذف</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="users">
+      <thead>
+        <tr>
+          <th>البريد الإلكتروني</th>
+          <th>تاريخ التسجيل</th>
+          <th>الحالة</th>
+          <th>عدد الصور</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.email }}</td>
+          <td>{{ u.created_at }}</td>
+          <td>{{ 'مدفوع' if u.status == 'paid' else 'مجاني' }}</td>
+          <td>{{ u.image_count }}</td>
+          <td>
+            {% if u.status == 'free' %}
+            <form style="display:inline" method="POST" action="/admin/upgrade">
+              <input type="hidden" name="user_id" value="{{ u.id }}">
+              <button class="btn btn-upgrade" type="submit">ترقية</button>
+            </form>
+            {% endif %}
+            <form style="display:inline" method="POST" action="/admin/delete" onsubmit="return confirm('تأكيد الحذف؟');">
+              <input type="hidden" name="user_id" value="{{ u.id }}">
+              <button class="btn btn-delete" type="submit">حذف</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 </body>
 </html>
