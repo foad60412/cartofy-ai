@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>تسجيل دخول الأدمن</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: 'Tajawal', sans-serif;
@@ -11,34 +12,72 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
+
     form {
       background: white;
-      padding: 30px;
+      padding: 30px 25px;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
     }
+
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #4a148c;
+    }
+
     input, button {
       display: block;
       margin-top: 10px;
-      padding: 10px;
+      padding: 12px;
       width: 100%;
       border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
+
     button {
       background: #6a1b9a;
       color: white;
       border: none;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #4a148c;
+    }
+
+    .message {
+      text-align: center;
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+      form {
+        padding: 20px;
+        margin: 10px;
+      }
     }
   </style>
 </head>
 <body>
   <form method="POST">
     <h2>لوحة دخول الأدمن</h2>
-    <input type="email" name="email" placeholder="البريد الإلكتروني">
-    <input type="password" name="password" placeholder="كلمة السر">
+    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+    <input type="password" name="password" placeholder="كلمة السر" required>
     <button type="submit">دخول</button>
+
+    <!-- سيتم عرض هذه الرسالة من السيرفر -->
+    {% if error %}
+      <div class="message">{{ error }}</div>
+    {% endif %}
   </form>
 </body>
 </html>
