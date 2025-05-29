@@ -15,7 +15,7 @@ def cartoonify_image(image_url):
     }
 
     payload = {
-        "version": "f109015d60170dfb20460f17da8cb863155823c85ece1115e1e9e4ec7ef51d3b",
+        "version": "a07f252abbbd832009640b27f063ea52d87d7a23a185ca165bec23b5adc8deaf",
         "input": {
             "image": image_url
         }

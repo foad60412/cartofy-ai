@@ -261,6 +261,9 @@ def upload():
 
     # تحويل الصورة
     cartoon_url = cartoonify_image(original_url)
+    # التأكد أن cartoon_url هو نص وليس قائمة
+    if isinstance(cartoon_url, list):
+        cartoon_url = cartoon_url[0]
 
     # حذف الصورة الأصلية بعد التحويل
     supabase.storage.from_('images').remove([original_filename])
