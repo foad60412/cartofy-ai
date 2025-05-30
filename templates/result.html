@@ -4,31 +4,58 @@
   <meta charset="UTF-8">
   <title>صورتك الكرتونية جاهزة - Cartofy</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
       font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(to bottom right, #e3f2fd, #f3e5f5);
+      background: linear-gradient(to bottom right, #fce4ec, #ede7f6);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
+      direction: rtl;
+      padding: 20px;
     }
 
-    .result-container {
-      background: white;
-      padding: 30px;
+    .result-wrapper {
+      background: #fff;
+      padding: 30px 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.08);
-      text-align: center;
       max-width: 600px;
-      width: 90%;
+      width: 100%;
+      text-align: center;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .subscribe-btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .subscribe-btn:hover {
+      background-color: #388e3c;
+      transform: scale(1.05);
     }
 
     h2 {
-      margin-bottom: 25px;
-      color: #4a148c;
+      margin-bottom: 20px;
+      color: #6a1b9a;
+      font-size: 24px;
     }
 
     img {
@@ -79,24 +106,49 @@
       font-weight: bold;
       text-decoration: underline;
     }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 20px;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 10px 18px;
+      }
+
+      .subscribe-btn {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="result-container">
+  <div class="result-wrapper">
+
+    {% if plan == "free" %}
+    <div class="header-bar">
+      <a href="/pay" class="subscribe-btn"><i class="fas fa-star"></i> اشترك الآن للوصول غير المحدود</a>
+    </div>
+    {% endif %}
+
     <h2>صورتك الكرتونية جاهزة!</h2>
+
     <img src="{{ cartoon }}" alt="Cartoon Image">
-    
-    <br>
-    <a href="{{ cartoon }}" class="btn" download><i class="fas fa-download"></i> تحميل الصورة</a>
-    <a href="/dashboard" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> العودة إلى لوحة التحكم</a>
+
+    <div>
+      <a href="{{ cartoon }}" class="btn" download><i class="fas fa-download"></i> تحميل الصورة</a>
+      <a href="/dashboard" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> العودة إلى لوحة التحكم</a>
+    </div>
 
     {% if plan == "free" %}
     <div class="subscribe-offer">
-      لقد استخدمت تحويلك المجاني. للاستمتاع بعدد غير محدود من التحويلات،
-      <a href="/pay">اشترك الآن</a>
+      لقد استخدمت تحويلك المجاني. للاستمتاع بعدد غير محدود من التحويلات، <a href="/pay">اشترك الآن</a>.
     </div>
     {% endif %}
+
   </div>
 
 </body>
